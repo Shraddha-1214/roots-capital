@@ -1,0 +1,24 @@
+/* Custom smooth scroll and typography */
+:root {
+  --font-serif: 'Playfair Display', serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #F8FAFC; /* wealth-light */
+}
+
+/* Custom Gold Glow effect for CTA buttons */
+.btn-gold-glow:hover {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+}
+
+/* Smooth glass effect for cards */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}

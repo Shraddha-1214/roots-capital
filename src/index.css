@@ -1,0 +1,42 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #020617; /* wealth-navy */
+    color: #F8FAFC; /* wealth-light */
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Custom scrollbar for minimalist feel */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #D4AF37, #927521);
+    border-radius: 10px;
+  }
+}
+
+/* Institutional Background Pattern */
+.bg-institutional {
+  background-image: radial-gradient(rgba(212, 175, 55, 0.05) 0.5px, transparent 0.5px);
+  background-size: 40px 40px;
+  opacity: 1;
+}
+
+/* Helper for smooth section transitions */
+section {
+  position: relative;
+  z-index: 10;
+}
