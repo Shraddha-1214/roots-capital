@@ -64,7 +64,7 @@ const Services: React.FC = () => {
               className={`group bg-white p-10 border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#630D0E]/20 transition-all duration-500 ${service.gridClass}`}
             >
               <div className="text-[#630D0E] mb-6 transform group-hover:scale-110 transition-transform duration-500">
-                {React.cloneElement(service.icon as React.ReactElement, { size: 40, strokeWidth: 1.2 })}
+                {React.cloneElement(service.icon as any, { size: 40, strokeWidth: 1.2 })}
               </div>
               <h4 className="text-2xl font-serif font-semibold text-slate-800 mb-4">{service.title}</h4>
               <p className="text-slate-600 leading-relaxed mb-6">

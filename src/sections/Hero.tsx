@@ -1,120 +1,53 @@
-import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import type { HeroProps } from '../types';
-import * as THREE from 'three';
-import Button from '../components/Button';
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
-// --- Theme Constants ---
-const NODE_COUNT = 48;
-const SPREAD_X = 14;
-const SPREAD_Y = 8;
-const CONNECTION_DISTANCE = 3.8;
-const LINE_COLOR = new THREE.Color('#1E293B');   // Deep slate for subtle lines
-const PULSE_COLOR = new THREE.Color('#F59E0B');  // Brighter Gold for "glow"
-const MAX_ACTIVE_PULSES = 10;                     
-const PULSE_SPEED = 0.45; 
-
-interface EdgeData { start: THREE.Vector3; end: THREE.Vector3; }
-interface PulseState { edgeIdx: number; progress: number; direction: 1 | -1; }
-
-function buildGraph(nodeCount: number) {
-  const nodes = Array.from({ length: nodeCount }, () => ({
-    position: new THREE.Vector3((Math.random() - 0.5) * SPREAD_X, (Math.random() - 0.5) * SPREAD_Y, 0),
-  }));
-  const edges: EdgeData[] = [];
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      if (nodes[i].position.distanceTo(nodes[j].position) < CONNECTION_DISTANCE) {
-        edges.push({ start: nodes[i].position, end: nodes[j].position });
-      }
-    }
-  }
-  return { nodes, edges };
-}
-
-const NetworkScene: React.FC<{ mouse: React.MutableRefObject<[number, number]>, edges: EdgeData[], nodes: any[] }> = ({ mouse, edges }) => {
-  const groupRef = useRef<THREE.Group>(null);
-  const pulsesRef = useRef<PulseState[]>([]);
-  const meshRefs = useRef<(THREE.Mesh | null)[]>([]);
-
-  useMemo(() => {
-    pulsesRef.current = Array.from({ length: MAX_ACTIVE_PULSES }, (_, i) => ({
-      edgeIdx: Math.floor(Math.random() * edges.length),
-      progress: i / MAX_ACTIVE_PULSES,
-      direction: (Math.random() > 0.5 ? 1 : -1) as 1 | -1,
-    }));
-  }, [edges.length]);
-
-  useFrame((_, delta) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, mouse.current[0] * 0.15, 0.05);
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -mouse.current[1] * 0.15, 0.05);
-    }
-    pulsesRef.current.forEach((pulse, i) => {
-      const mesh = meshRefs.current[i];
-      if (!mesh) return;
-      pulse.progress += delta * PULSE_SPEED * pulse.direction;
-      if (pulse.progress >= 1 || pulse.progress <= 0) {
-        pulse.edgeIdx = Math.floor(Math.random() * edges.length);
-        pulse.progress = pulse.direction === 1 ? 0 : 1;
-      }
-      const edge = edges[pulse.edgeIdx];
-      mesh.position.lerpVectors(edge.start, edge.end, pulse.progress);
-      (mesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 2 + Math.sin(pulse.progress * Math.PI) * 3;
-    });
-  });
-
+const Hero: React.FC = () => {
   return (
-    <group ref={groupRef}>
-      <ambientLight intensity={1.5} />
-      <lineSegments>
-        <bufferGeometry attach="geometry" {...new THREE.BufferGeometry().setFromPoints(edges.flatMap(e => [e.start, e.end]))} />
-        <lineBasicMaterial color={LINE_COLOR} transparent opacity={0.1} />
-      </lineSegments>
-      {pulsesRef.current.map((_, i) => (
-        <mesh key={i} ref={(el) => { meshRefs.current[i] = el; }}>
-          <sphereGeometry args={[0.05, 16, 16]} />
-          <meshStandardMaterial color={PULSE_COLOR} emissive={PULSE_COLOR} transparent opacity={0.8} />
-        </mesh>
-      ))}
-    </group>
-  );
-};
+    <section className="relative min-h-screen flex items-center bg-[#F9F7F2] overflow-hidden pt-20">
+      {/* Subtle Watercolor/Texture Overlay (Optional) */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
-const Hero: React.FC<HeroProps> = ({ onCtaClick, onSecondaryCtaClick }) => {
-  const mouse = useRef<[number, number]>([0, 0]);
-  const { nodes, edges } = useMemo(() => buildGraph(NODE_COUNT), []);
-
-  return (
-    <section 
-      onMouseMove={(e) => (mouse.current = [(e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1])}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-wealth-navy"
-    >
-      <div className="absolute inset-0 z-0 opacity-40">
-        <Canvas camera={{ position: [0, 0, 9], fov: 45 }}>
-          <NetworkScene mouse={mouse} edges={edges} nodes={nodes} />
-        </Canvas>
-      </div>
-      
-      {/* Spotlight effect for readability */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#020617_85%)] z-0" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-        <div data-aos="zoom-out-up" className="space-y-8">
-          <span className="text-wealth-gold font-bold tracking-[0.4em] uppercase text-xs">Premium Wealth Advisory</span>
-          <h1 className="text-5xl md:text-8xl font-serif font-bold text-white tracking-tighter leading-tight">
-            Connected to roots of <br/> every <span className="text-wealth-gold italic">financial need.</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div data-aos="fade-right">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="h-[1px] w-12 bg-[#5E1214]"></span>
+            <span className="text-[#5E1214] font-bold tracking-[0.2em] text-xs uppercase">Boutique Wealth Advisory</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-serif text-[#2D3436] leading-[1.1] mb-8">
+            Helping families <br />
+            <span className="italic font-light text-slate-400">create lasting</span> <br />
+            <span className="text-[#5E1214]">legacies</span>
           </h1>
-          <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-            Educating individuals in an easy-to-understand manner so they can grasp personal finance and pursue their financial objectives.
+          
+          <p className="text-lg text-slate-600 mb-10 max-w-lg leading-relaxed">
+            Because wealth is only one dimension of what you leave behind. We provide conflict-free, transparent advice for the modern billionaire.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-10">
-            <Button variant="primary" size="lg" className="px-10 py-4 shadow-[0_0_30px_rgba(212,175,55,0.2)]" onClick={onCtaClick}>
-              Get Started
-            </Button>
-            <button className="text-white/80 hover:text-wealth-gold transition-all font-bold uppercase tracking-widest text-sm" onClick={onSecondaryCtaClick}>
-              Learn More →
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button className="bg-[#5E1214] text-white px-8 py-4 font-bold flex items-center justify-center gap-3 hover:bg-[#4A0D0F] transition-colors shadow-lg shadow-[#5E1214]/10">
+              Get in Touch <ArrowRight size={18} />
             </button>
+            <button className="border border-slate-300 text-slate-700 px-8 py-4 font-bold hover:bg-white transition-colors">
+              Our Process
+            </button>
+          </div>
+        </div>
+
+        {/* Right Side: Sophisticated Visual */}
+        <div className="relative" data-aos="zoom-in">
+          <div className="aspect-[4/5] bg-[#F2F2F2] overflow-hidden">
+             {/* Replace with a high-end image of a classic library or abstract architecture */}
+             <img 
+               src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80" 
+               alt="Sophisticated Office" 
+               className="w-full h-full object-cover mix-blend-multiply opacity-80"
+             />
+          </div>
+          {/* Gold Accent Box */}
+          <div className="absolute -bottom-6 -left-6 bg-[#B69354] p-8 hidden md:block">
+            <p className="text-white text-3xl font-serif">13+</p>
+            <p className="text-white/80 text-xs uppercase tracking-widest font-bold">Years of Trust</p>
           </div>
         </div>
       </div>
