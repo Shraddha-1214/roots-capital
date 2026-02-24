@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import type { NavbarProps } from '../types';
 
-
 const Navbar: React.FC<NavbarProps> = ({
   navItems = [
     { label: 'Home', href: '#home' },
@@ -42,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      {/* Scroll Progress Bar - Changed to Maroon */}
+      {/* Scroll Progress Bar */}
       <div 
         className="fixed top-0 left-0 h-1 bg-[#5E1214] z-[70] transition-all duration-150 ease-out"
         style={{ width: `${scrollProgress}%` }}
@@ -62,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             
-            {/* Logo - Changed text-white to text-slate-900 */}
+            {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <a
                 href="#"
@@ -77,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({
               </a>
             </div>
 
-            {/* Desktop Navigation - Changed text-white/80 to text-slate-600 */}
+            {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
                 {navItems.map((item, index) => (
@@ -93,17 +92,17 @@ const Navbar: React.FC<NavbarProps> = ({
               </div>
             </div>
 
-            {/* Desktop CTA - Changed to Maroon button */}
+            {/* Desktop CTA - UPDATED TO CURVED EDGES */}
             <div className="hidden md:block">
               <button
                 onClick={onCtaClick || closeMobileMenu}
-                className="bg-[#5E1214] text-white px-6 py-2.5 font-bold text-sm hover:bg-[#4A0D0F] transition-colors"
+                className="bg-[#5E1214] text-white px-8 py-2.5 rounded-full font-bold text-sm hover:bg-[#4A0D0F] transition-all transform hover:scale-105 shadow-md"
               >
                 {ctaText}
               </button>
             </div>
 
-            {/* Mobile menu button - Changed text-white to text-slate-900 */}
+            {/* Mobile menu button */}
             <div className="md:hidden flex items-center">
               <button
                 onClick={toggleMobileMenu}
@@ -147,8 +146,9 @@ const Navbar: React.FC<NavbarProps> = ({
               </a>
             ))}
             <div className="pt-10">
+               {/* MOBILE CTA - ALSO CURVED */}
                <button 
-                className="bg-[#5E1214] text-white px-10 py-4 font-bold text-lg"
+                className="bg-[#5E1214] text-white px-12 py-4 rounded-full font-bold text-lg shadow-lg"
                 onClick={onCtaClick || closeMobileMenu}
               >
                 {ctaText}

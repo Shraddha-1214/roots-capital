@@ -1,91 +1,71 @@
 import React from 'react';
-import { 
-  TrendingUp, 
-  ShieldCheck, 
-  Wallet, 
-  Briefcase, 
-  HeartPulse,
-  ArrowRight
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
-const services = [
+const modes = [
   {
-    title: "Wealth Management",
-    desc: "Investment portfolios reflecting your risk tolerance and time horizon.",
-    icon: <TrendingUp />,
-    gridClass: "md:col-span-2",
+    id: "01",
+    title: "Personal Investment Management",
+    desc: "Bespoke portfolios for portfolios starting at ₹20 Crores, focused on risk-adjusted growth.",
+    category: "HNI Services"
   },
   {
-    title: "Retirement Strategy",
-    desc: "A sound strategy to pursue your dream retirement goals.",
-    icon: <Briefcase />,
-    gridClass: "md:col-span-1",
+    id: "02",
+    title: "Multi-family Office",
+    desc: "Strategic wealth coordination for families with > ₹50 Crores in investable assets.",
+    category: "Institutional"
   },
   {
-    title: "Life Insurance",
-    desc: "Protecting your family from financial consequences.",
-    icon: <ShieldCheck />,
-    gridClass: "md:col-span-1",
-  },
-  {
-    title: "Fixed Income",
-    desc: "Capital preservation and short-term goal alignment.",
-    icon: <Wallet />,
-    gridClass: "md:col-span-1",
-  },
-  {
-    title: "Health Insurance",
-    desc: "Unavoidable protection against rising health threats.",
-    icon: <HeartPulse />,
-    gridClass: "md:col-span-1",
+    id: "03",
+    title: "Single Family Office",
+    desc: "A dedicated 'Built-Operate-Transfer' model for asset bases exceeding ₹2000 Crores.",
+    category: "Legacy"
   }
 ];
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-24 bg-[#F9F7F2]"> {/* The Cream Background */}
+    <section id="services" className="py-32 bg-[#F9F7F2] border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="mb-16 border-l-4 border-[#630D0E] pl-6" data-aos="fade-right">
-          <h2 className="text-[#630D0E] font-bold uppercase tracking-widest text-sm mb-2">Our Expertise</h2>
-          <h3 className="text-4xl md:text-5xl font-serif font-medium text-slate-900">
-            Bespoke Financial <span className="italic font-light text-slate-500">Solutions</span>
-          </h3>
+        {/* Header - Minimalist & Balanced */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div className="max-w-2xl" data-aos="fade-right">
+            <h4 className="text-[#5E1214] font-bold uppercase tracking-[0.3em] text-xs mb-4">Modes of Engagement</h4>
+            <h3 className="text-4xl md:text-6xl font-serif text-slate-900 leading-tight">
+              We help shorten the distance between <span className="italic text-slate-400 font-light underline decoration-[#B69354]/30">Success</span> and <span className="text-[#5E1214]">Happiness</span>
+            </h3>
+          </div>
+          <button className="text-sm font-bold uppercase tracking-widest border-b-2 border-[#5E1214] pb-2 hover:text-[#5E1214] transition-all">
+            View All Services
+          </button>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={index}
+        {/* Engagement Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 border-t border-slate-200">
+          {modes.map((mode, index) => (
+            <div 
+              key={index} 
+              className="group p-12 border-b md:border-b-0 md:border-r border-slate-200 hover:bg-white transition-all duration-700"
               data-aos="fade-up"
               data-aos-delay={index * 100}
-              className={`group bg-white p-10 border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#630D0E]/20 transition-all duration-500 ${service.gridClass}`}
             >
-              <div className="text-[#630D0E] mb-6 transform group-hover:scale-110 transition-transform duration-500">
-                {React.cloneElement(service.icon as any, { size: 40, strokeWidth: 1.2 })}
-              </div>
-              <h4 className="text-2xl font-serif font-semibold text-slate-800 mb-4">{service.title}</h4>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                {service.desc}
+              <span className="text-4xl font-serif text-slate-200 group-hover:text-[#5E1214]/20 transition-colors duration-500">
+                {mode.id}
+              </span>
+              <h5 className="mt-8 text-[#B69354] uppercase tracking-widest text-[10px] font-bold">
+                {mode.category}
+              </h5>
+              <h4 className="mt-4 text-2xl font-serif text-slate-900 group-hover:text-[#5E1214] transition-colors">
+                {mode.title}
+              </h4>
+              <p className="mt-6 text-slate-500 leading-relaxed text-sm">
+                {mode.desc}
               </p>
-              <button className="flex items-center text-[#630D0E] font-bold text-sm uppercase tracking-wider group-hover:gap-3 transition-all">
-                Learn More <ArrowRight size={16} className="ml-2" />
-              </button>
+              <div className="mt-10 flex items-center gap-2 text-[#5E1214] font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+                Learn More <ArrowRight size={14} />
+              </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* THE MAROON BREAK SECTION (Just like Entrust) */}
-      <div className="mt-24 bg-[#630D0E] py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h4 className="text-[#C5A059] uppercase tracking-[0.3em] text-xs font-bold mb-6">Experience Excellence</h4>
-          <p className="text-white text-2xl md:text-3xl font-serif leading-relaxed italic">
-            "Our approach is built on the pillars of trust, transparency, and a deep understanding of your family's legacy."
-          </p>
-          <div className="mt-10 h-1 w-20 bg-[#C5A059] mx-auto"></div>
         </div>
       </div>
     </section>
