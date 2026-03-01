@@ -1,69 +1,67 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
-
-const modes = [
-  {
-    id: "01",
-    title: "Personal Investment Management",
-    desc: "Bespoke portfolios for portfolios starting at ₹20 Crores, focused on risk-adjusted growth.",
-    category: "HNI Services"
-  },
-  {
-    id: "02",
-    title: "Multi-family Office",
-    desc: "Strategic wealth coordination for families with > ₹50 Crores in investable assets.",
-    category: "Institutional"
-  },
-  {
-    id: "03",
-    title: "Single Family Office",
-    desc: "A dedicated 'Built-Operate-Transfer' model for asset bases exceeding ₹2000 Crores.",
-    category: "Legacy"
-  }
-];
+import { Briefcase, TrendingUp, ShieldCheck, HeartHandshake } from 'lucide-react';
 
 const Services: React.FC = () => {
+  const services = [
+    {
+      number: "01",
+      title: "Estate Planning",
+      desc: "Structuring legacies to ensure seamless transition of wealth across generations.",
+      icon: <Briefcase size={24} />
+    },
+    {
+      number: "02",
+      title: "Investment Advisory",
+      desc: "Bespoke portfolios aligned with your family’s risk profile and long-term goals.",
+      icon: <TrendingUp size={24} />
+    },
+    {
+      number: "03",
+      title: "Tax Optimization",
+      desc: "Strategic planning to protect assets and maximize efficiency in global markets.",
+      icon: <ShieldCheck size={24} />
+    },
+    {
+      number: "04",
+      title: "Philanthropy",
+      desc: "Guided charitable giving to create a lasting impact on causes your family values.",
+      icon: <HeartHandshake size={24} />
+    }
+  ];
+
   return (
-    <section id="services" className="py-32 bg-[#F9F7F2] border-t border-slate-200">
+    <section id="services" className="py-24 bg-[#F5F2ED]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header - Minimalist & Balanced */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-          <div className="max-w-2xl" data-aos="fade-right">
-            <h4 className="text-[#5E1214] font-bold uppercase tracking-[0.3em] text-xs mb-4">Modes of Engagement</h4>
-            <h3 className="text-4xl md:text-6xl font-serif text-slate-900 leading-tight">
-              We help shorten the distance between <span className="italic text-slate-400 font-light underline decoration-[#B69354]/30">Success</span> and <span className="text-[#5E1214]">Happiness</span>
-            </h3>
-          </div>
-          <button className="text-sm font-bold uppercase tracking-widest border-b-2 border-[#5E1214] pb-2 hover:text-[#5E1214] transition-all">
-            View All Services
-          </button>
+        {/* Section Header */}
+        <div className="text-center mb-20" data-aos="fade-up">
+          <h4 className="text-[#5E1214] font-bold uppercase tracking-[0.3em] text-[12px] mb-4">Our Expertise</h4>
+          <h2 className="text-4xl md:text-5xl font-serif text-slate-900">Bespoke Family Solutions</h2>
+          <div className="mt-6 h-1 w-20 bg-[#5E1214] mx-auto"></div>
         </div>
 
-        {/* Engagement Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 border-t border-slate-200">
-          {modes.map((mode, index) => (
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => (
             <div 
-              key={index} 
-              className="group p-12 border-b md:border-b-0 md:border-r border-slate-200 hover:bg-white transition-all duration-700"
+              key={index}
               data-aos="fade-up"
               data-aos-delay={index * 100}
+              className="group bg-white p-10 rounded-lg border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#5E1214]/20 transition-all duration-500 relative overflow-hidden"
             >
-              <span className="text-4xl font-serif text-slate-200 group-hover:text-[#5E1214]/20 transition-colors duration-500">
-                {mode.id}
+              {/* UPDATED: High Visibility Numbers */}
+              <span className="absolute top-4 right-6 text-5xl font-serif text-[#5E1214]/30 group-hover:text-[#5E1214]/60 transition-colors">
+                {service.number}
               </span>
-              <h5 className="mt-8 text-[#B69354] uppercase tracking-widest text-[10px] font-bold">
-                {mode.category}
-              </h5>
-              <h4 className="mt-4 text-2xl font-serif text-slate-900 group-hover:text-[#5E1214] transition-colors">
-                {mode.title}
-              </h4>
-              <p className="mt-6 text-slate-500 leading-relaxed text-sm">
-                {mode.desc}
-              </p>
-              <div className="mt-10 flex items-center gap-2 text-[#5E1214] font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
-                Learn More <ArrowRight size={14} />
+
+              <div className="text-[#5E1214] mb-8 bg-[#F5F2ED] w-14 h-14 rounded-lg flex items-center justify-center group-hover:bg-[#5E1214] group-hover:text-white transition-all duration-500">
+                {service.icon}
               </div>
+
+              <h4 className="text-2xl font-serif text-slate-900 mb-4">{service.title}</h4>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                {service.desc}
+              </p>
             </div>
           ))}
         </div>

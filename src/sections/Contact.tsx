@@ -1,73 +1,63 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-24 bg-wealth-navy text-white overflow-hidden relative">
-      {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-wealth-gold/5 -skew-x-12 translate-x-20" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section id="contact" className="py-24 bg-[#FDFCFB]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row gap-16 items-start">
           
-          {/* Left: Contact Info */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-wealth-gold font-bold uppercase tracking-widest text-sm mb-4">Contact Us</h2>
-              <h3 className="text-4xl md:text-5xl font-serif font-bold mb-6">Ready to secure your <br/>financial future?</h3>
-              <p className="text-white/60 text-lg max-w-md">
-                Stop by our office or reach out via phone. Our relationships begin with a simple conversation.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="bg-white/10 p-3 rounded-xl"><MapPin className="text-wealth-gold" /></div>
-                <div>
-                  <h4 className="font-bold text-lg">Our Office</h4>
-                  <p className="text-white/60">Office No 1003, Millenium Empire,<br/>Sector - 15, Kharghar, Navi Mumbai - 410210</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="bg-white/10 p-3 rounded-xl"><Phone className="text-wealth-gold" /></div>
-                <div>
-                  <h4 className="font-bold text-lg">Call Us</h4>
-                  <p className="text-white/60">9022757060 / 8097807061</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="bg-white/10 p-3 rounded-xl"><Mail className="text-wealth-gold" /></div>
-                <div>
-                  <h4 className="font-bold text-lg">Email Us</h4>
-                  <p className="text-white/60">info@rootscapital.in</p>
-                </div>
-              </div>
-            </div>
+          {/* Text Content */}
+          <div className="w-full md:w-1/2" data-aos="fade-right">
+            <h4 className="text-[#5E1214] font-bold uppercase tracking-[0.3em] text-[12px] mb-4">Connect With Us</h4>
+            <h2 className="text-4xl md:text-5xl font-serif text-slate-900 mb-8 leading-tight">
+              Begin Your Family's <span className="italic font-light text-slate-500 text-3xl md:text-4xl block mt-2">Wealth Journey</span>
+            </h2>
+            <p className="text-slate-600 text-lg leading-relaxed mb-8 max-w-md">
+              Schedule a confidential consultation with our advisors to discuss your legacy objectives and preservation strategies.
+            </p>
+            <div className="h-1 w-20 bg-[#5E1214]"></div>
           </div>
 
-          {/* Right: Modern Mini-Form */}
-          <div className="bg-white rounded-3xl p-8 md:p-10 text-wealth-navy shadow-2xl">
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-wealth-navy/40">Full Name</label>
-                  <input type="text" className="w-full bg-wealth-light border-none rounded-xl p-4 focus:ring-2 focus:ring-wealth-gold transition-all" placeholder="John Doe" />
+          {/* Contact Form - Refined Nude Style */}
+          <div className="w-full md:w-1/2" data-aos="fade-left">
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-2 ml-1">Full Name</label>
+                  <input 
+                    type="text" 
+                    className="w-full px-6 py-4 bg-[#F5F2ED] border border-slate-200 rounded-lg focus:outline-none focus:border-[#5E1214]/40 transition-colors text-slate-800"
+                    placeholder="Shraddha Jamdade"
+                  />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-wealth-navy/40">Email Address</label>
-                  <input type="email" className="w-full bg-wealth-light border-none rounded-xl p-4 focus:ring-2 focus:ring-wealth-gold transition-all" placeholder="john@example.com" />
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-2 ml-1">Email Address</label>
+                  <input 
+                    type="email" 
+                    className="w-full px-6 py-4 bg-[#F5F2ED] border border-slate-200 rounded-lg focus:outline-none focus:border-[#5E1214]/40 transition-colors text-slate-800"
+                    placeholder="email@example.com"
+                  />
                 </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-bold uppercase tracking-wider text-wealth-navy/40">Message</label>
-                <textarea rows={4} className="w-full bg-wealth-light border-none rounded-xl p-4 focus:ring-2 focus:ring-wealth-gold transition-all" placeholder="How can we help you?" />
+              
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-2 ml-1">Message</label>
+                <textarea 
+                  rows={4}
+                  className="w-full px-6 py-4 bg-[#F5F2ED] border border-slate-200 rounded-lg focus:outline-none focus:border-[#5E1214]/40 transition-colors text-slate-800 resize-none"
+                  placeholder="How can we assist your legacy planning?"
+                ></textarea>
               </div>
-              <button className="w-full bg-wealth-gold text-wealth-navy font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:ring-2 hover:ring-wealth-gold transition-all duration-300">
-                Send Message <Send size={18} />
+
+              <button 
+                type="submit" 
+                className="w-full bg-[#5E1214] text-white py-5 rounded-lg font-bold uppercase tracking-[0.2em] text-xs hover:bg-[#4A0D0F] transition-all shadow-lg flex items-center justify-center gap-3"
+              >
+                Request Consultation <Send size={16} />
               </button>
             </form>
           </div>
-
         </div>
       </div>
     </section>

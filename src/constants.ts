@@ -4,31 +4,18 @@
 
 // Color Palette
 export const COLORS = {
-  // Primary Colors
-  NAVY: '#1E293B',        // Deep Navy Blue - Professional, trustworthy
-  GOLD: '#F59E0B',        // Gold - Wealth, premium quality
-  CHARCOAL: '#0F172A',    // Charcoal - High contrast text
-  LIGHT: '#F8FAFC',       // Light Gray - Clean background
+  // Primary - Nude/Beige Palette
+  NUDE_LIGHT: '#FDFCFB',    // Softest background
+  NUDE_BASE: '#F5F2ED',     // Standard nude
+  NUDE_DARK: '#E8E2D9',     // For methodology background
   
-  // Secondary Colors
-  TEAL: '#06B6D4',        // Teal - Modern, innovative
-  EMERALD: '#10B981',     // Emerald Green - Growth, stability
-  GOLD_LIGHT: '#FBBF24',  // Light Gold - Accents
-  NAVY_LIGHT: '#334155',  // Light Navy - Secondary elements
+  // Brand Accent
+  MAROON: '#5E1214',        // Keeping your legacy maroon
+  GOLD_MUTED: '#B69354',    // Muted gold for accents
   
-  // Semantic Colors
-  WHITE: '#FFFFFF',
-  BLACK: '#000000',
-  GRAY_50: '#F9FAFB',
-  GRAY_100: '#F3F4F6',
-  GRAY_200: '#E5E7EB',
-  GRAY_300: '#D1D5DB',
-  GRAY_400: '#9CA3AF',
-  GRAY_500: '#6B7280',
-  GRAY_600: '#4B5563',
-  GRAY_700: '#374151',
-  GRAY_800: '#1F2937',
-  GRAY_900: '#111827',
+  // Text
+  CHARCOAL: '#2D3436',      
+  SLATE_600: '#475569',
 };
 
 // Typography
