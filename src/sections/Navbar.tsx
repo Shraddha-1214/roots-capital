@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import type { NavbarProps } from '../types';
+
+// Defining the props interface to ensure ctaText is recognized
+interface NavbarProps {
+  navItems?: { label: string; href: string }[];
+  logoText?: string;
+  ctaText?: string; // This was being ignored
+  onCtaClick?: () => void;
+  className?: string;
+}
 
 const Navbar: React.FC<NavbarProps> = ({
   navItems = [
@@ -9,7 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({
     { label: 'Contact', href: '#contact' },
   ],
   logoText = 'Roots Capital',
-  ctaText = 'Get Started',
+  ctaText = 'Get Started', // Now properly read below
   onCtaClick,
   className = '',
 }) => {
@@ -24,74 +32,58 @@ const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // This function is now called when a mobile link is clicked
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
-    document.body.style.overflow = 'auto';
   };
 
   return (
-    <nav
-      className={`
-        fixed top-0 left-0 right-0 z-50
-        transition-all duration-500 ease-in-out
-        ${isScrolled 
-          ? 'bg-white/90 backdrop-blur-md border-b border-slate-200 py-2 shadow-sm' 
-          : 'bg-transparent py-4'
-        }
-        ${className}
-      `}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-14">
-          
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <a
-              href="#"
-              className="text-xl font-serif font-bold tracking-tight text-slate-900"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            >
-              {logoText}
+    <nav className={`fixed top-0 w-full z-50 transition-all ${isScrolled ? 'bg-white/90 backdrop-blur-md py-2 shadow-sm' : 'bg-transparent py-4'} ${className}`}>
+      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+        
+        <div className="text-xl font-serif font-bold text-slate-900">{logoText}</div>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-8">
+          {navItems.map((item, index) => (
+            <a key={index} href={item.href} className="text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-[#5E1214]">
+              {item.label}
             </a>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-[#5E1214] transition-all"
-              >
-                {item.label}
-              </a>
-            ))}
-            
-            {/* UPDATED: Get Started Button with rounded-lg */}
-            <button
+          ))}
+          
+          {/* FIX: ctaText is now read here */}
+          <button 
             onClick={onCtaClick}
-              className="bg-[#5E1214] text-white px-8 py-2.5 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-[#4A0D0F] transition-all shadow-sm"
-            >
-              GET STARTED
-            </button>
-          </div>
+            className="bg-[#5E1214] text-white px-6 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-[#4A0D0F] transition-all"
+          >
+            {ctaText} 
+          </button>
+        </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-slate-900"
-            >
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
-            </button>
-          </div>
+        {/* Mobile Toggle */}
+        <div className="md:hidden">
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2">
+            <div className="w-6 h-0.5 bg-slate-900 mb-1"></div>
+            <div className="w-6 h-0.5 bg-slate-900"></div>
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white absolute top-full left-0 w-full p-6 shadow-xl flex flex-col space-y-4">
+          {navItems.map((item, index) => (
+            <a 
+              key={index} 
+              href={item.href} 
+              onClick={closeMobileMenu} // FIX: closeMobileMenu is now read here
+              className="text-sm font-bold uppercase text-slate-600"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };
